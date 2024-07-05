@@ -1,2 +1,1 @@
-# My-first-page
-Ma première page web
+C'est en forgeant qu'on devient forgeron.
