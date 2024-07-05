@@ -41,6 +41,10 @@
         }
         .calculator-container {
             text-align: left;
+            display: inline-block;
+            background-color: #ff69b4; /* Rose */
+            padding: 10px;
+            border: 1px solid #000;
         }
         .calculator-title {
             text-align: center;
@@ -48,29 +52,23 @@
             color: white;
             padding: 10px;
             margin-bottom: 10px;
-            width: fit-content;
-            display: inline-block;
-        }
-        .calculator {
-            display: inline-block;
-            padding: 10px;
-            border: 1px solid #000;
-            background-color: #ff69b4; /* Rose */
-            width: calc(4 * 25% + 4 * 2%);
+            width: 100%;
             box-sizing: border-box;
         }
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
         .calculator input[type="text"] {
-            width: 100%;
+            grid-column: span 4;
             padding: 5px;
-            margin-bottom: 10px;
             font-size: 1em;
             text-align: right;
             box-sizing: border-box;
         }
         .calculator button {
-            width: 25%;
             padding: 10px;
-            margin: 1%;
             font-size: 1.2em;
             background-color: #ff1493; /* Rose foncé */
             border: none;
@@ -98,22 +96,18 @@
             <div class="calculator-title">Calculette</div>
             <div class="calculator">
                 <input type="text" id="display" disabled>
-                <br>
                 <button onclick="appendToDisplay('1')">1</button>
                 <button onclick="appendToDisplay('2')">2</button>
                 <button onclick="appendToDisplay('3')">3</button>
                 <button class="operation" onclick="performOperation('+')">+</button>
-                <br>
                 <button onclick="appendToDisplay('4')">4</button>
                 <button onclick="appendToDisplay('5')">5</button>
                 <button onclick="appendToDisplay('6')">6</button>
                 <button class="operation" onclick="performOperation('-')">-</button>
-                <br>
                 <button onclick="appendToDisplay('7')">7</button>
                 <button onclick="appendToDisplay('8')">8</button>
                 <button onclick="appendToDisplay('9')">9</button>
                 <button class="operation" onclick="performOperation('*')">*</button>
-                <br>
                 <button onclick="clearDisplay()">C</button>
                 <button onclick="appendToDisplay('0')">0</button>
                 <button onclick="calculateResult()">=</button>
