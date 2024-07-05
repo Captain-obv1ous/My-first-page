@@ -167,4 +167,68 @@
 
     <script>
         let displayValue = '';
-       
+        let currentOperation = null;
+        let firstOperand = null;
+
+        function appendToDisplay(value) {
+            displayValue += value;
+            document.getElementById('display').value = displayValue;
+        }
+
+        function clearDisplay() {
+            displayValue = '';
+            currentOperation = null;
+            firstOperand = null;
+            document.getElementById('display').value = displayValue;
+        }
+
+        function performOperation(operation) {
+            if (displayValue === '') return;
+
+            if (firstOperand === null) {
+                firstOperand = parseFloat(displayValue);
+            } else if (currentOperation) {
+                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
+                firstOperand = result;
+                document.getElementById('display').value = result;
+            }
+
+            currentOperation = operation;
+            displayValue = '';
+        }
+
+        function calculateResult() {
+            if (currentOperation && displayValue !== '') {
+                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
+                document.getElementById('display').value = result;
+                displayValue = result;
+                firstOperand = null;
+                currentOperation = null;
+
+                if (result === 666) {
+                    openModal();
+                }
+            }
+        }
+
+        function calculate(operation, operand1, operand2) {
+            switch (operation) {
+                case '+': return operand1 + operand2;
+                case '-': return operand1 - operand2;
+                case '*': return operand1 * operand2;
+                case '/': return operand1 / operand2;
+                default: return operand2;
+            }
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+    </script>
+</body>
+</html>
+     
