@@ -53,7 +53,7 @@
             text-align: right;
         }
         .calculator button {
-            width: 23%;
+            width: 7%;
             padding: 10px;
             margin: 1%;
             font-size: 1.2em;
@@ -63,6 +63,13 @@
         }
         .calculator button.operation {
             background-color: #c71585; /* Violet foncé */
+        }
+        .calculator-title {
+            text-align: center;
+            background-color: #ff00ff; /* Rose flashy */
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -78,6 +85,7 @@
         <p>Voici ma première page web créée en collaboration avec Chat GPT. Merci de votre visite !</p>
         <p><a href="https://www.youtube.com/@Capta1n_0bv10us" target="_blank">Lien vers ma chaîne YouTube</a></p>
         
+        <div class="calculator-title">Calculette</div>
         <div class="calculator">
             <input type="text" id="display" disabled>
             <br>
@@ -96,67 +104,4 @@
             <button onclick="appendToDisplay('9')">9</button>
             <button class="operation" onclick="performOperation('*')">*</button>
             <br>
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="appendToDisplay('0')">0</button>
-            <button onclick="calculateResult()">=</button>
-            <button class="operation" onclick="performOperation('/')">/</button>
-        </div>
-    </div>
-    <footer>
-        <hr>
-        <p>&copy; 05/07/2024 Captain Obviouss & Chat GPT</p>
-    </footer>
-    <script>
-        let displayValue = '';
-        let currentOperation = null;
-        let firstOperand = null;
-
-        function appendToDisplay(value) {
-            displayValue += value;
-            document.getElementById('display').value = displayValue;
-        }
-
-        function clearDisplay() {
-            displayValue = '';
-            currentOperation = null;
-            firstOperand = null;
-            document.getElementById('display').value = displayValue;
-        }
-
-        function performOperation(operation) {
-            if (displayValue === '') return;
-
-            if (firstOperand === null) {
-                firstOperand = parseFloat(displayValue);
-            } else if (currentOperation) {
-                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
-                firstOperand = result;
-                document.getElementById('display').value = result;
-            }
-
-            currentOperation = operation;
-            displayValue = '';
-        }
-
-        function calculateResult() {
-            if (currentOperation && displayValue !== '') {
-                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
-                document.getElementById('display').value = result;
-                displayValue = result;
-                firstOperand = null;
-                currentOperation = null;
-            }
-        }
-
-        function calculate(operation, operand1, operand2) {
-            switch (operation) {
-                case '+': return operand1 + operand2;
-                case '-': return operand1 - operand2;
-                case '*': return operand1 * operand2;
-                case '/': return operand1 / operand2;
-                default: return operand2;
-            }
-        }
-    </script>
-</body>
-</html>
+            <button onclick="clearDispl
