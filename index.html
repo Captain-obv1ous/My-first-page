@@ -41,39 +41,41 @@
         }
         .calculator-container {
             text-align: left;
-            display: inline-block;
         }
         .calculator-title {
-            display: inline-block;
             text-align: center;
             background-color: #ff00ff; /* Rose flashy */
             color: white;
             padding: 10px;
             margin-bottom: 10px;
-            width: calc(4 * 23% + 4 * 2% + 1% + 1cm);
+            width: fit-content;
+            display: inline-block;
         }
         .calculator {
             display: inline-block;
             padding: 10px;
             border: 1px solid #000;
             background-color: #ff69b4; /* Rose */
-            width: calc(4 * 23% + 4 * 2% + 1% + 1cm);
+            width: calc(4 * 25% + 4 * 2%);
+            box-sizing: border-box;
         }
         .calculator input[type="text"] {
-            width: 93%;
+            width: 100%;
             padding: 5px;
             margin-bottom: 10px;
             font-size: 1em;
             text-align: right;
+            box-sizing: border-box;
         }
         .calculator button {
-            width: 23%;
+            width: 25%;
             padding: 10px;
             margin: 1%;
             font-size: 1.2em;
             background-color: #ff1493; /* Rose foncé */
             border: none;
             color: white;
+            box-sizing: border-box;
         }
         .calculator button.operation {
             background-color: #c71585; /* Violet foncé */
