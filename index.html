@@ -39,6 +39,24 @@
             max-width: 100%;
             height: auto;
         }
+        .calculator {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #000;
+            background-color: #e0e0e0;
+        }
+        .calculator input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .calculator button {
+            width: 23%;
+            padding: 10px;
+            margin: 1%;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -52,10 +70,86 @@
         </div>
         <p>Voici ma première page web créée en collaboration avec Chat GPT. Merci de votre visite !</p>
         <p><a href="https://www.youtube.com/@Capta1n_0bv10us" target="_blank">Lien vers ma chaîne YouTube</a></p>
+        
+        <div class="calculator">
+            <input type="text" id="display" disabled>
+            <br>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="performOperation('+')">+</button>
+            <br>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="performOperation('-')">-</button>
+            <br>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="performOperation('*')">*</button>
+            <br>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="performOperation('/')">/</button>
+        </div>
     </div>
     <footer>
         <hr>
         <p>&copy; 04/07/2024 Captain Obviouss & Chat GPT</p>
     </footer>
+    <script>
+        let displayValue = '';
+        let currentOperation = null;
+        let firstOperand = null;
+
+        function appendToDisplay(value) {
+            displayValue += value;
+            document.getElementById('display').value = displayValue;
+        }
+
+        function clearDisplay() {
+            displayValue = '';
+            currentOperation = null;
+            firstOperand = null;
+            document.getElementById('display').value = displayValue;
+        }
+
+        function performOperation(operation) {
+            if (displayValue === '') return;
+
+            if (firstOperand === null) {
+                firstOperand = parseFloat(displayValue);
+            } else if (currentOperation) {
+                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
+                firstOperand = result;
+                document.getElementById('display').value = result;
+            }
+
+            currentOperation = operation;
+            displayValue = '';
+        }
+
+        function calculateResult() {
+            if (currentOperation && displayValue !== '') {
+                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
+                document.getElementById('display').value = result;
+                displayValue = result;
+                firstOperand = null;
+                currentOperation = null;
+            }
+        }
+
+        function calculate(operation, operand1, operand2) {
+            switch (operation) {
+                case '+': return operand1 + operand2;
+                case '-': return operand1 - operand2;
+                case '*': return operand1 * operand2;
+                case '/': return operand1 / operand2;
+                default: return operand2;
+            }
+        }
+    </script>
 </body>
 </html>
