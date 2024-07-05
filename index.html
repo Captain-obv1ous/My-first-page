@@ -79,6 +79,40 @@
         .calculator button.operation {
             background-color: #c71585; /* Violet foncé */
         }
+        /* Styles pour le modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
         /* Message secret : Bravo d'avoir cherché ici. Indice : La calculette permet d'ouvrir une autre dimension ! */
     </style>
 </head>
@@ -121,62 +155,16 @@
         <hr>
         <p>&copy; 05/07/2024 Captain Obviouss & Chat GPT</p>
     </footer>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Bravo tu as trouvé l'accès à une autre dimension</p>
+            <a href="https://www.instagram.com/c4pt41n_0bv10us" target="_blank">Lien vers une autre dimension</a>
+        </div>
+    </div>
+
     <script>
         let displayValue = '';
-        let currentOperation = null;
-        let firstOperand = null;
-
-        function appendToDisplay(value) {
-            displayValue += value;
-            document.getElementById('display').value = displayValue;
-        }
-
-        function clearDisplay() {
-            displayValue = '';
-            currentOperation = null;
-            firstOperand = null;
-            document.getElementById('display').value = displayValue;
-        }
-
-        function performOperation(operation) {
-            if (displayValue === '') return;
-
-            if (firstOperand === null) {
-                firstOperand = parseFloat(displayValue);
-            } else if (currentOperation) {
-                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
-                firstOperand = result;
-                document.getElementById('display').value = result;
-            }
-
-            currentOperation = operation;
-            displayValue = '';
-        }
-
-        function calculateResult() {
-            if (currentOperation && displayValue !== '') {
-                const result = calculate(currentOperation, firstOperand, parseFloat(displayValue));
-                document.getElementById('display').value = result;
-                displayValue = result;
-                firstOperand = null;
-                currentOperation = null;
-
-                if (result === 666) {
-                    window.alert('Bravo tu as trouvé l\'accès à une autre dimension');
-                    window.open('https://www.instagram.com/c4pt41n_0bv10us', '_blank');
-                }
-            }
-        }
-
-        function calculate(operation, operand1, operand2) {
-            switch (operation) {
-                case '+': return operand1 + operand2;
-                case '-': return operand1 - operand2;
-                case '*': return operand1 * operand2;
-                case '/': return operand1 / operand2;
-                default: return operand2;
-            }
-        }
-    </script>
-</body>
-</html>
+       
